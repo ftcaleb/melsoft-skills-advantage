@@ -5,8 +5,8 @@ import { EVENT, ATTENDANCE, IN_PERSON, MAIN_SITE } from "./event.js";
 import { sendRegistration, registrationConfigured, getLeadSource } from "./registration.js";
 
 /* ── The Skills Advantage — RSVP page ──────────────────────────────────
-   One page: an editorial hero beside a boardroom photo, then one focused
-   form panel. Submissions go to apps-script/Code.gs (see registration.js).
+   One page: the heading, event banner and details on the left, the RSVP
+   form on the right. Submissions go to apps-script/Code.gs (see registration.js).
    Event copy lives in event.js. */
 
 const FIELDS = [
@@ -123,10 +123,10 @@ export default function App() {
           {/* 2. Photo */}
           <div className="wr-hero-media">
             <img
-              src="/images/boardroom.webp"
-              alt="Business leaders in conversation around a boardroom table overlooking Sandton"
-              width={1600}
-              height={768}
+              src="/images/event-space.webp"
+              alt="A speaker addressing a seated audience at a Melsoft Academy event, beneath the Melsoft Academy logo"
+              width={2172}
+              height={724}
               fetchPriority="high"
             />
           </div>

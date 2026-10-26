@@ -29,7 +29,7 @@ npm run preview    # serves dist/ to check the build
 | `src/styles/base.css` | Fonts, colour tokens, reset |
 | `src/styles/page.css` | Page layout and components |
 | `apps-script/Code.gs` | Google Sheet backend for the form |
-| `public/` | Logo, boardroom photo, Canela font, favicons |
+| `public/` | Logo, event-space banner (3:1), Canela font, favicons |
 
 ## Connect the form
 
@@ -47,8 +47,8 @@ yet" instead of submitting.
 - [ ] **Date:** `src/event.js` still says "Thursday, November 2026" — add the day.
 - [ ] **Venue and times:** confirm against the final event details.
 - [ ] **Form endpoint:** set `VITE_REGISTRATION_ENDPOINT` (see above) and send a test RSVP.
-- [ ] **Share image:** `og:image` in `index.html` is a relative path; make it the
-      full `https://…/images/boardroom.webp` URL once the domain is known.
+- [ ] **Share image:** `og:image` in `index.html` points at the vercel.app address;
+      update it if the page moves to its own domain.
 - [ ] **Confirmation email:** none is sent yet. Add one to `apps-script/Code.gs`
       once the event details are final.
 

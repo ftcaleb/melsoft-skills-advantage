@@ -209,10 +209,13 @@
   color: var(--text-2);
 }
 
+/* The event-space banner is exactly 3:1 (2172x724) with the Melsoft logo
+   centred in it, so the frame matches it at every width: nothing is cropped
+   and the logo is always whole. */
 .wr-hero-media {
   position: relative;
   margin-top: 36px;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 3 / 1;
   overflow: hidden;
   border-radius: var(--wr-radius-lg);
   background: var(--surface-2);
@@ -631,10 +634,6 @@ fieldset.wr-field > legend {
     max-width: 680px;
   }
 
-  .wr-hero-media {
-    aspect-ratio: 16 / 9;
-  }
-
   .wr-jump {
     display: inline-flex;
   }
@@ -643,12 +642,6 @@ fieldset.wr-field > legend {
     width: 100%;
     max-width: 600px;
     margin-inline: auto;
-  }
-}
-
-@media (max-width: 640px) {
-  .wr-hero-media {
-    aspect-ratio: 4 / 3;
   }
 }
 
