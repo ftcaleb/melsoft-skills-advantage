@@ -1,0 +1,690 @@
+/* ── The Skills Advantage — page styles ────────────────────────────────
+   A light take on an executive-event RSVP: an editorial hero beside a
+   photo, then one focused form panel. Colour comes only from the tokens in
+   base.css (navy ink, maroon accent, neutral lines) and there are no
+   gradients. */
+
+/* ── Nav ────────────────────────────────────────────────────────────────
+   The melsoftacademy.com floating glass pill, values copied from its
+   Nav.jsx (unscrolled state): fixed at the top, centred, max 1100px, a
+   frosted white pill with a soft navy shadow, the full logo on the left and
+   a navy pill button on the right. It does not shrink on scroll. */
+.sa-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  pointer-events: none; /* only the pill itself takes clicks */
+}
+
+.sa-nav-row {
+  display: flex;
+  justify-content: center;
+  padding: 18px 20px 0;
+}
+
+.sa-nav-pill {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 40px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    0 8px 32px rgba(30, 40, 95, 0.09),
+    0 1.5px 0 rgba(255, 255, 255, 0.18) inset;
+}
+
+.sa-nav-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 40px;
+}
+
+.sa-nav-logo img {
+  height: 38px;
+  width: auto;
+}
+
+.sa-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 9px 22px;
+  border-radius: 9999px;
+  background: var(--ink);
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  border: 0;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(94, 7, 67, 0.22);
+  transition: box-shadow 0.2s ease;
+}
+
+.sa-nav-cta:hover {
+  box-shadow: 0 4px 18px rgba(94, 7, 67, 0.4);
+}
+
+.sa-nav-cta:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 3px;
+}
+
+/* Clears the fixed pill: 18px offset + 62px pill. */
+.sa-nav-spacer {
+  height: 80px;
+}
+
+@media (max-width: 640px) {
+  .sa-nav-logo img {
+    height: 40px;
+  }
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────── */
+.sa-footer {
+  padding: 0 clamp(16px, 5vw, 64px) 40px;
+  text-align: center;
+  background: var(--surface);
+}
+
+.sa-footer-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.sa-footer-mark::before,
+.sa-footer-mark::after {
+  content: "";
+  width: 56px;
+  height: 1px;
+  background: var(--line-2);
+}
+
+.sa-footer-links {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.sa-footer-links a:hover {
+  color: var(--maroon);
+  text-decoration: underline;
+}
+
+/* ── Page ───────────────────────────────────────────────────────────── */
+.wr-page {
+  --wr-gutter: clamp(16px, 5vw, 64px);
+  --wr-radius: var(--radius-sm);   /* fields, choices, buttons */
+  --wr-radius-lg: var(--rad-card); /* photo, form panel */
+  background: var(--surface);
+  color: var(--ink);
+  padding-bottom: clamp(64px, 10vw, 128px);
+}
+
+.wr-rule {
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--maroon);
+}
+
+/* ── Hero ───────────────────────────────────────────────────────────────
+   Three stacked rows in the nav pill's 1100px column: the heading (title on
+   the left, subtitle and intro on the right), the photo across the full
+   width, then the event details in one row beneath it. */
+.wr-hero,
+.wr-reserve {
+  width: min(1100px, 100% - 2 * var(--wr-gutter));
+  margin-inline: auto;
+}
+
+.wr-hero {
+  padding-top: clamp(32px, 5vw, 64px);
+}
+
+.wr-hero-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: end;
+}
+
+.wr-hero-head .wr-rule {
+  margin-bottom: 28px;
+}
+
+.wr-title {
+  margin: 0;
+  font-size: clamp(52px, 6.2vw, 88px);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.wr-title span {
+  display: block;
+}
+
+.wr-title .wr-accent {
+  color: var(--maroon);
+}
+
+.wr-hero-lede {
+  padding-bottom: 6px;
+}
+
+.wr-subtitle {
+  margin: 0;
+  max-width: 24ch;
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.3;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.wr-subtitle em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--maroon);
+}
+
+.wr-intro {
+  margin: 16px 0 0;
+  max-width: 44ch;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.wr-hero-media {
+  position: relative;
+  margin-top: clamp(32px, 4vw, 48px);
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  border-radius: var(--wr-radius-lg);
+  background: var(--surface-2);
+}
+
+.wr-hero-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  display: block;
+}
+
+/* Details: one row of three, divided by hairlines. */
+.wr-details {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 0 0 28px;
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  border-bottom: 1px solid var(--line-2);
+}
+
+.wr-details li {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 0 28px;
+  border-left: 1px solid var(--line-2);
+}
+
+.wr-details li:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.wr-details svg {
+  color: var(--maroon);
+}
+
+.wr-detail-main {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.wr-detail-note {
+  display: block;
+  margin-top: 3px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-2);
+}
+
+.wr-jump {
+  margin-top: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--maroon);
+  cursor: pointer;
+}
+
+.wr-jump svg {
+  transition: transform 0.2s ease;
+}
+
+.wr-jump:hover svg {
+  transform: translateY(2px);
+}
+
+.wr-jump:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 4px;
+}
+
+/* ── Form panel ─────────────────────────────────────────────────────── */
+.wr-reserve {
+  padding-top: clamp(56px, 7vw, 88px);
+}
+
+.wr-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: clamp(28px, 6vw, 56px);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--wr-radius-lg);
+  box-shadow: var(--shadow-soft);
+  /* Clears the fixed nav when the card is scrolled into view. */
+  scroll-margin-top: 112px;
+}
+
+.wr-card > .wr-rule {
+  width: 40px;
+  margin-bottom: 22px;
+}
+
+.wr-card-title {
+  margin: 0;
+  font-size: clamp(34px, 5vw, 46px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.wr-card-kicker {
+  margin: 14px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.wr-form {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.wr-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.wr-label {
+  padding: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.wr-req {
+  color: var(--maroon);
+}
+
+.wr-opt {
+  margin-left: 4px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-3);
+}
+
+/* fieldset's legend sits outside the flex gap, so space it by hand. */
+fieldset.wr-field > legend {
+  margin-bottom: 8px;
+}
+
+.wr-input {
+  width: 100%;
+  padding: 13px 14px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--wr-radius);
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.wr-input::placeholder {
+  color: var(--text-3);
+  opacity: 0.75;
+}
+
+.wr-input:hover {
+  border-color: var(--line-2);
+}
+
+.wr-input:focus {
+  outline: none;
+  background: var(--bg);
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(10, 23, 51, 0.08);
+}
+
+.wr-field.is-error .wr-input {
+  background: var(--bg);
+  border-color: var(--maroon);
+}
+
+.wr-err {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--maroon);
+}
+
+/* Attendance: two radio tiles instead of bare dots — a bigger target on
+   a phone, and the choice reads at a glance. */
+.wr-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.wr-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--wr-radius);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.wr-option:hover {
+  border-color: var(--line-2);
+}
+
+.wr-option.is-checked {
+  background: var(--bg);
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.wr-field.is-error .wr-option {
+  border-color: var(--maroon);
+}
+
+.wr-option input {
+  -webkit-appearance: none;
+  appearance: none;
+  flex-shrink: 0;
+  display: grid;
+  place-content: center;
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  background: var(--bg);
+  border: 1.5px solid var(--line-2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.wr-option input::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+
+.wr-option input:checked {
+  border-color: var(--ink);
+}
+
+.wr-option input:checked::before {
+  transform: scale(1);
+}
+
+.wr-option input:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.wr-option-text strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.wr-option-text span {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.wr-alert {
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--maroon);
+  background: var(--tint-rose);
+  border-radius: var(--wr-radius);
+}
+
+.wr-submit,
+.wr-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: var(--wr-radius);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.wr-submit {
+  width: 100%;
+  margin-top: 10px;
+  padding: 18px 24px;
+  color: #fff;
+  background: var(--ink);
+  border: 0;
+}
+
+.wr-submit:hover:not(:disabled) {
+  background: var(--maroon);
+}
+
+.wr-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.wr-submit svg,
+.wr-back svg {
+  transition: transform 0.15s ease;
+}
+
+.wr-submit:hover:not(:disabled) svg,
+.wr-back:hover svg {
+  transform: translateX(3px);
+}
+
+.wr-submit:focus-visible,
+.wr-back:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 3px;
+}
+
+/* ── Confirmation (replaces the form in place) ───────────────────────── */
+.wr-done-copy {
+  margin: 16px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.wr-done-copy strong {
+  color: var(--ink);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.wr-summary {
+  margin: 28px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.wr-summary > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.wr-summary dt {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.wr-summary dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  color: var(--ink);
+}
+
+.wr-back {
+  margin-top: 32px;
+  padding: 15px 22px;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+}
+
+.wr-back:hover {
+  color: #fff;
+  background: var(--ink);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .wr-hero-head {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .wr-hero-media {
+    aspect-ratio: 16 / 9;
+  }
+
+  .wr-details {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .wr-details li,
+  .wr-details li:first-child {
+    padding: 0;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .wr-hero-media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .wr-details {
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 420px) {
+  .wr-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wr-page *,
+  .wr-page *::before {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,115 @@
+/* ── Fonts ──────────────────────────────────────────────────────────────
+   Canela Bold for headings, Inter for everything else — the same pair as
+   melsoftacademy.com. The fallback faces are metric-matched to Canela and
+   Inter, so the swap when the real fonts arrive does not shift the layout. */
+@font-face {
+  font-family: "Canela";
+  src: url("/fonts/Canela-Bold-Trial.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Canela Fallback";
+  src: local("Georgia"), local("Times New Roman"), local("Times");
+  size-adjust: 106.3%;
+  ascent-override: 72.9%;
+  descent-override: 21.2%;
+  line-gap-override: 18.8%;
+}
+
+/* The Canela trial files have no "%" or "—" glyph; borrow both from the
+   system sans so they read as deliberate rather than a stray fallback. */
+@font-face {
+  font-family: "Canela";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Arial"), local("Helvetica Neue"), local("Helvetica");
+  font-weight: bold;
+  unicode-range: U+25, U+2014;
+  size-adjust: 88%;
+}
+
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("Helvetica Neue"), local("Helvetica");
+  size-adjust: 107.1%;
+  ascent-override: 90.4%;
+  descent-override: 22.5%;
+  line-gap-override: 0%;
+}
+
+/* ── Tokens ─────────────────────────────────────────────────────────────
+   The melsoftacademy.com palette, trimmed to what this page uses. Navy ink,
+   maroon accent, neutral lines. No other hues, no gradients. */
+:root {
+  --ink: #0a1733;
+  --ink-2: #1a2545;
+  --maroon: #5e0743;
+  --text-2: #5b6478;
+  --text-3: #646c85;
+  --line: #e5e8f0;
+  --line-2: #ccd2df;
+  --surface: #f7f8fb;
+  --surface-2: #eef1f7;
+  --bg: #ffffff;
+  --tint-rose: #fbdde5;
+  --rad-card: 20px;
+  --radius-sm: 12px;
+  --shadow-soft: 0 6px 24px -12px rgba(10, 23, 51, 0.16);
+}
+
+/* ── Reset ─────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Canela", "Canela Fallback", serif;
+  font-weight: bold;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.page-enter {
+  animation: pageIn 0.35s ease both;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
+  }
+}
