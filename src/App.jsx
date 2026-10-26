@@ -102,7 +102,7 @@ export default function App() {
 
   return (
     <>
-      <Nav onRsvp={toForm} showRsvp={!submitted} />
+      <Nav />
       <div className="sa-nav-spacer" aria-hidden="true" />
 
       <main className="page-enter wr-page">
