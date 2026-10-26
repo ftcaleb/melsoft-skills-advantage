@@ -38,7 +38,7 @@
 var CONFIG = {
   // Leave "" and run setup() to create a new sheet, or paste the ID of an
   // existing one (the long part of its URL between /d/ and /edit).
-  SHEET_ID: "",
+  SHEET_ID: "1lYGF4yz4Qv1vLN7RDXj3boEdBa2Ii3xje5P15m4T4B0",
   SHEET_NAME: "Skills Advantage RSVPs",
   TAB: "RSVPs",
 
