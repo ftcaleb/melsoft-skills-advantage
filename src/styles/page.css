@@ -150,34 +150,28 @@
   background: var(--maroon);
 }
 
-/* ── Hero ───────────────────────────────────────────────────────────────
-   Three stacked rows in the nav pill's 1100px column: the heading (title on
-   the left, subtitle and intro on the right), the photo across the full
-   width, then the event details in one row beneath it. */
-.wr-hero,
-.wr-reserve {
+/* ── Layout ─────────────────────────────────────────────────────────────
+   Two columns in the nav pill's 1100px width. Left: the heading, the photo
+   and the event details, in that order. Right: the RSVP form, visible from
+   the first screen. Below 1080px everything stacks in the same order. */
+.wr-layout {
   width: min(1100px, 100% - 2 * var(--wr-gutter));
   margin-inline: auto;
-}
-
-.wr-hero {
-  padding-top: clamp(32px, 5vw, 64px);
-}
-
-.wr-hero-head {
+  padding-top: clamp(32px, 5vw, 56px);
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: clamp(32px, 5vw, 72px);
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+  gap: clamp(40px, 5vw, 72px);
+  align-items: start;
 }
 
+/* ── Hero (left column) ─────────────────────────────────────────────── */
 .wr-hero-head .wr-rule {
   margin-bottom: 28px;
 }
 
 .wr-title {
   margin: 0;
-  font-size: clamp(52px, 6.2vw, 88px);
+  font-size: clamp(52px, 5.6vw, 80px);
   line-height: 0.96;
   letter-spacing: -0.025em;
   color: var(--ink);
@@ -191,14 +185,10 @@
   color: var(--maroon);
 }
 
-.wr-hero-lede {
-  padding-bottom: 6px;
-}
-
 .wr-subtitle {
-  margin: 0;
-  max-width: 24ch;
-  font-size: clamp(20px, 2vw, 26px);
+  margin: 24px 0 0;
+  max-width: 26ch;
+  font-size: clamp(20px, 2vw, 24px);
   line-height: 1.3;
   font-weight: 400;
   letter-spacing: -0.01em;
@@ -212,8 +202,8 @@
 }
 
 .wr-intro {
-  margin: 16px 0 0;
-  max-width: 44ch;
+  margin: 14px 0 0;
+  max-width: 46ch;
   font-size: 16px;
   line-height: 1.6;
   color: var(--text-2);
@@ -221,8 +211,8 @@
 
 .wr-hero-media {
   position: relative;
-  margin-top: clamp(32px, 4vw, 48px);
-  aspect-ratio: 16 / 7;
+  margin-top: 36px;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   border-radius: var(--wr-radius-lg);
   background: var(--surface-2);
@@ -238,14 +228,13 @@
   display: block;
 }
 
-/* Details: one row of three, divided by hairlines. */
 .wr-details {
   list-style: none;
-  margin: 32px 0 0;
-  padding: 0 0 28px;
-  display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr);
-  border-bottom: 1px solid var(--line-2);
+  margin: 28px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .wr-details li {
@@ -253,13 +242,6 @@
   grid-template-columns: 20px 1fr;
   gap: 14px;
   align-items: start;
-  padding: 0 28px;
-  border-left: 1px solid var(--line-2);
-}
-
-.wr-details li:first-child {
-  padding-left: 0;
-  border-left: 0;
 }
 
 .wr-details svg {
@@ -281,9 +263,10 @@
   color: var(--text-2);
 }
 
+/* Only needed once the form drops below the fold (stacked layout). */
 .wr-jump {
+  display: none;
   margin-top: 22px;
-  display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 8px 0;
@@ -311,15 +294,9 @@
   outline-offset: 4px;
 }
 
-/* ── Form panel ─────────────────────────────────────────────────────── */
-.wr-reserve {
-  padding-top: clamp(56px, 7vw, 88px);
-}
-
+/* ── Form panel (right column) ──────────────────────────────────────── */
 .wr-card {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: clamp(28px, 6vw, 56px);
+  padding: clamp(28px, 4vw, 44px);
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: var(--wr-radius-lg);
@@ -335,7 +312,7 @@
 
 .wr-card-title {
   margin: 0;
-  font-size: clamp(34px, 5vw, 46px);
+  font-size: clamp(32px, 3.4vw, 40px);
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--ink);
@@ -644,35 +621,34 @@ fieldset.wr-field > legend {
 }
 
 /* ── Responsive ─────────────────────────────────────────────────────── */
-@media (max-width: 900px) {
-  .wr-hero-head {
+@media (max-width: 1080px) {
+  .wr-layout {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: clamp(48px, 7vw, 72px);
+  }
+
+  .wr-hero {
+    max-width: 680px;
   }
 
   .wr-hero-media {
     aspect-ratio: 16 / 9;
   }
 
-  .wr-details {
-    grid-template-columns: 1fr;
-    gap: 18px;
+  .wr-jump {
+    display: inline-flex;
   }
 
-  .wr-details li,
-  .wr-details li:first-child {
-    padding: 0;
-    border-left: 0;
+  .wr-reserve {
+    width: 100%;
+    max-width: 600px;
+    margin-inline: auto;
   }
 }
 
 @media (max-width: 640px) {
   .wr-hero-media {
     aspect-ratio: 4 / 3;
-  }
-
-  .wr-details {
-    margin-top: 28px;
   }
 }
 

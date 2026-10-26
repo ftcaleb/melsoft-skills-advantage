@@ -106,21 +106,18 @@ export default function App() {
       <div className="sa-nav-spacer" aria-hidden="true" />
 
       <main className="page-enter wr-page">
+        <div className="wr-layout">
         <section className="wr-hero">
           {/* 1. Heading */}
           <div className="wr-hero-head">
-            <div>
-              <span className="wr-rule" aria-hidden="true" />
-              <h1 className="wr-title">
-                <span>{EVENT.titleLead}</span> <span className="wr-accent">{EVENT.titleAccent}</span>
-              </h1>
-            </div>
-            <div className="wr-hero-lede">
-              <p className="wr-subtitle">
-                {EVENT.subtitle} <em>{EVENT.year}</em>
-              </p>
-              <p className="wr-intro">{EVENT.intro}</p>
-            </div>
+            <span className="wr-rule" aria-hidden="true" />
+            <h1 className="wr-title">
+              <span>{EVENT.titleLead}</span> <span className="wr-accent">{EVENT.titleAccent}</span>
+            </h1>
+            <p className="wr-subtitle">
+              {EVENT.subtitle} <em>{EVENT.year}</em>
+            </p>
+            <p className="wr-intro">{EVENT.intro}</p>
           </div>
 
           {/* 2. Photo */}
@@ -260,6 +257,7 @@ export default function App() {
             )}
           </div>
         </section>
+        </div>
       </main>
 
       <footer className="sa-footer">
