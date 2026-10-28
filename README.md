@@ -44,8 +44,6 @@ yet" instead of submitting.
 
 ## Before going live
 
-- [ ] **Date:** `src/event.js` still says "Thursday, November 2026" — add the day.
-- [ ] **Venue and times:** confirm against the final event details.
 - [ ] **Form endpoint:** set `VITE_REGISTRATION_ENDPOINT` (see above) and send a test RSVP.
 - [ ] **Share image:** `og:image` in `index.html` points at the vercel.app address;
       update it if the page moves to its own domain.

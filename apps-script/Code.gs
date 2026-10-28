@@ -136,7 +136,7 @@ function testRsvp() {
     email: "test@example.com",
     phone: "082 000 0000",
     company: "Test Co",
-    attendance: "In person (Sandton / Rosebank)",
+    attendance: "In person (WeWork Rosebank)",
     role: "Other",
     dietary: "",
     source: "apps-script-test",
