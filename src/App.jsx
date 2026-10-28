@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "./Icon.jsx";
 import Nav from "./Nav.jsx";
-import { EVENT, ATTENDANCE, IN_PERSON, MAIN_SITE } from "./event.js";
+import { EVENT, ATTENDANCE, ROLES, MAIN_SITE } from "./event.js";
 import { sendRegistration, registrationConfigured, getLeadSource } from "./registration.js";
 
 /* ── The Skills Advantage — RSVP page ──────────────────────────────────
@@ -13,7 +13,7 @@ const FIELDS = [
   { key: "fullName", label: "Name", type: "text", placeholder: "Full name", autoComplete: "name" },
   { key: "workEmail", label: "Corporate email", type: "email", placeholder: "you@company.co.za", autoComplete: "email" },
   { key: "phone", label: "Phone number", type: "tel", placeholder: "082 123 4567", autoComplete: "tel" },
-  { key: "role", label: "Job title", type: "text", placeholder: "e.g. CEO, Head of L&D, Director", autoComplete: "organization-title" },
+  { key: "role", label: "Job title / Designation", placeholder: "Select one", options: ROLES },
   { key: "company", label: "Company / Organisation", type: "text", placeholder: "Company name", autoComplete: "organization" },
 ];
 
@@ -22,7 +22,7 @@ const smoothScroll = () =>
 
 export default function App() {
   const [data, setData] = useState({
-    fullName: "", role: "", workEmail: "", phone: "", company: "", attendance: "", dietary: "",
+    fullName: "", role: "", workEmail: "", phone: "", company: "", dietary: "",
   });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -48,9 +48,8 @@ export default function App() {
     if (!data.fullName.trim()) errs.fullName = "Enter your name";
     if (!/^[^@]+@[^@]+\.[^@]+$/.test(data.workEmail)) errs.workEmail = "Enter a valid work email";
     if (!data.phone.trim()) errs.phone = "Enter a phone number";
-    if (!data.role.trim()) errs.role = "Enter your job title";
+    if (!data.role) errs.role = "Choose your job title";
     if (!data.company.trim()) errs.company = "Enter your company";
-    if (!data.attendance) errs.attendance = "Choose how you'll attend";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -74,12 +73,10 @@ export default function App() {
         name: data.fullName.trim(),
         email: data.workEmail.trim(),
         phone: data.phone.trim(),
-        role: data.role.trim(),
+        role: data.role,
         company: data.company.trim(),
-        attendance: data.attendance,
-        // Only the in-person seat is catered; a virtual registrant may have
-        // typed something before switching, so it is dropped here.
-        dietary: data.attendance === IN_PERSON ? data.dietary.trim() : "",
+        attendance: ATTENDANCE,
+        dietary: data.dietary.trim(),
         source: getLeadSource(),
       });
       setSubmitted(true);
@@ -166,7 +163,7 @@ export default function App() {
                 <dl className="wr-summary">
                   <div>
                     <dt>Attending</dt>
-                    <dd>{data.attendance}</dd>
+                    <dd>{ATTENDANCE}</dd>
                   </div>
                   <div>
                     <dt>Name</dt>
@@ -189,62 +186,45 @@ export default function App() {
                       <label className="wr-label" htmlFor={f.key}>
                         {f.label} <span className="wr-req" aria-hidden="true">*</span>
                       </label>
-                      <input
-                        className="wr-input"
-                        type={f.type}
-                        placeholder={f.placeholder}
-                        autoComplete={f.autoComplete}
-                        required
-                        {...fieldProps(f.key)}
-                      />
+                      {f.options ? (
+                        <div className="wr-select">
+                          <select
+                            className={"wr-input" + (data[f.key] ? "" : " is-empty")}
+                            required
+                            {...fieldProps(f.key)}
+                          >
+                            <option value="" disabled>{f.placeholder}</option>
+                            {f.options.map((o) => (
+                              <option key={o} value={o}>{o}</option>
+                            ))}
+                          </select>
+                          <Icon name="chevron-down" size={16} strokeWidth={2} />
+                        </div>
+                      ) : (
+                        <input
+                          className="wr-input"
+                          type={f.type}
+                          placeholder={f.placeholder}
+                          autoComplete={f.autoComplete}
+                          required
+                          {...fieldProps(f.key)}
+                        />
+                      )}
                       {errors[f.key] && <span id={`${f.key}-err`} className="wr-err">{errors[f.key]}</span>}
                     </div>
                   ))}
 
-                  <fieldset
-                    className={"wr-field" + (errors.attendance ? " is-error" : "")}
-                    aria-describedby={errors.attendance ? "attendance-err" : undefined}
-                  >
-                    <legend className="wr-label">
-                      Attendance mode <span className="wr-req" aria-hidden="true">*</span>
-                    </legend>
-                    <div className="wr-options">
-                      {ATTENDANCE.map((opt) => (
-                        <label
-                          key={opt.value}
-                          className={"wr-option" + (data.attendance === opt.value ? " is-checked" : "")}
-                        >
-                          <input
-                            type="radio"
-                            name="attendance"
-                            value={opt.value}
-                            checked={data.attendance === opt.value}
-                            onChange={() => update("attendance", opt.value)}
-                            disabled={submitting}
-                          />
-                          <span className="wr-option-text">
-                            <strong>{opt.label}</strong>
-                            <span>{opt.note}</span>
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                    {errors.attendance && <span id="attendance-err" className="wr-err">{errors.attendance}</span>}
-                  </fieldset>
-
-                  {data.attendance === IN_PERSON && (
-                    <div className="wr-field">
-                      <label className="wr-label" htmlFor="dietary">
-                        Dietary requirements <span className="wr-opt">Optional</span>
-                      </label>
-                      <input
-                        className="wr-input"
-                        type="text"
-                        placeholder="Any dietary requirements or allergies"
-                        {...fieldProps("dietary")}
-                      />
-                    </div>
-                  )}
+                  <div className="wr-field">
+                    <label className="wr-label" htmlFor="dietary">
+                      Dietary requirements <span className="wr-opt">Optional</span>
+                    </label>
+                    <input
+                      className="wr-input"
+                      type="text"
+                      placeholder="Any dietary requirements or allergies"
+                      {...fieldProps("dietary")}
+                    />
+                  </div>
 
                   {submitError && <div className="wr-alert" role="alert">{submitError}</div>}
 

@@ -23,7 +23,7 @@ npm run preview    # serves dist/ to check the build
 
 | File | What it holds |
 |---|---|
-| `src/event.js` | All event copy: title, date, time, venue, attendance options |
+| `src/event.js` | All event copy: title, intro, date, time, venue, job title options |
 | `src/App.jsx` | The page: top bar, hero, RSVP form, confirmation, footer |
 | `src/registration.js` | Sends the RSVP to the Apps Script endpoint |
 | `src/styles/base.css` | Fonts, colour tokens, reset |

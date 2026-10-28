@@ -11,20 +11,26 @@ export const EVENT = {
   subtitle: "Navigating Compliance, Tech & Talent in",
   year: "2026",
   intro:
-    "Join C-Suite Executives and Transformation Leaders to bridge South Africa's skills gap " +
-    "and secure enterprise compliance.",
+    "Join C-Suite Executives and Transformation Leaders to bridge South Africa’s skills gap " +
+    "and secure enterprise compliance. This is a premium peer-to-peer platform to navigate " +
+    "regulatory shifts, share best practices, and tackle critical skills shortages.",
   details: [
     { icon: "calendar", main: "Thursday, November 2026" },
     { icon: "clock", main: "15:30 – 17:30 SAST", note: "Executive networking & dinner 17:45 – 18:30" },
-    { icon: "pin", main: "Sandton / Rosebank Executive Conference Centre", note: "& virtual livestream" },
+    { icon: "pin", main: "Sandton / Rosebank Executive Conference Centre" },
   ],
 };
 
-/* `value` is what lands in the sheet, worded as the visitor read it. */
-export const ATTENDANCE = [
-  { value: "In person (Sandton / Rosebank)", label: "In person", note: "Sandton / Rosebank" },
-  { value: "Virtual stream", label: "Virtual stream", note: "Watch live online" },
+/* In-person only, so every RSVP carries this to the sheet's Attendance column. */
+export const ATTENDANCE = "In person (Sandton / Rosebank)";
+
+/* The job title dropdown, exactly as these land in the sheet. */
+export const ROLES = [
+  "Learning and Development",
+  "Human Resources",
+  "Information Technology",
+  "Transformation",
+  "Other",
 ];
-export const IN_PERSON = ATTENDANCE[0].value;
 
 export const MAIN_SITE = "https://www.melsoftacademy.com";

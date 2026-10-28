@@ -367,11 +367,6 @@
   color: var(--text-3);
 }
 
-/* fieldset's legend sits outside the flex gap, so space it by hand. */
-fieldset.wr-field > legend {
-  margin-bottom: 8px;
-}
-
 .wr-input {
   width: 100%;
   padding: 13px 14px;
@@ -414,94 +409,34 @@ fieldset.wr-field > legend {
   color: var(--maroon);
 }
 
-/* Attendance: two radio tiles instead of bare dots — a bigger target on
-   a phone, and the choice reads at a glance. */
-.wr-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+/* Job title dropdown: the native control, drawn like the text inputs,
+   with the page's own chevron in place of the browser arrow. */
+.wr-select {
+  position: relative;
 }
 
-.wr-option {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 14px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--wr-radius);
-  cursor: pointer;
-  transition:
-    border-color 0.15s ease,
-    background-color 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.wr-option:hover {
-  border-color: var(--line-2);
-}
-
-.wr-option.is-checked {
-  background: var(--bg);
-  border-color: var(--ink);
-  box-shadow: inset 0 0 0 1px var(--ink);
-}
-
-.wr-field.is-error .wr-option {
-  border-color: var(--maroon);
-}
-
-.wr-option input {
+.wr-select select {
   -webkit-appearance: none;
   appearance: none;
-  flex-shrink: 0;
-  display: grid;
-  place-content: center;
-  width: 18px;
-  height: 18px;
-  margin: 1px 0 0;
-  background: var(--bg);
-  border: 1.5px solid var(--line-2);
-  border-radius: 50%;
+  padding-right: 40px;
   cursor: pointer;
-  transition: border-color 0.15s ease;
 }
 
-.wr-option input::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--ink);
-  transform: scale(0);
-  transition: transform 0.15s ease;
+.wr-select select.is-empty {
+  color: var(--text-3);
 }
 
-.wr-option input:checked {
-  border-color: var(--ink);
-}
-
-.wr-option input:checked::before {
-  transform: scale(1);
-}
-
-.wr-option input:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 2px;
-}
-
-.wr-option-text strong {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
+.wr-select option {
   color: var(--ink);
 }
 
-.wr-option-text span {
-  display: block;
-  margin-top: 2px;
-  font-size: 13px;
-  color: var(--text-2);
+.wr-select svg {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  color: var(--ink-2);
+  pointer-events: none;
 }
 
 .wr-alert {
@@ -641,12 +576,6 @@ fieldset.wr-field > legend {
     width: 100%;
     max-width: 600px;
     margin-inline: auto;
-  }
-}
-
-@media (max-width: 420px) {
-  .wr-options {
-    grid-template-columns: 1fr;
   }
 }
 

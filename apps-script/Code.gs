@@ -135,9 +135,9 @@ function testRsvp() {
     name: "Test Person",
     email: "test@example.com",
     phone: "082 000 0000",
-    role: "Test",
     company: "Test Co",
-    attendance: "Virtual stream",
+    attendance: "In person (Sandton / Rosebank)",
+    role: "Other",
     dietary: "",
     source: "apps-script-test",
   }) } });
